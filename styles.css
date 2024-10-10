@@ -1,0 +1,190 @@
+/*
+    Author: Rory Hackney
+    This is the CSS for my Art Supply Tracker website. This ensures cool and hip styles for my
+    content. It is used by all pages to ensure a consistent look and feel.
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*HEADER*/
+header {
+    background-color: darkblue;
+    background-image: linear-gradient(180deg, rgb(11, 11, 77), darkblue);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+header img {
+    width: 200px;
+    height: auto;
+}
+
+header a:nth-of-type(2) {
+    text-decoration: none;
+}
+
+h1 {
+    font-family: "Leckerli One", cursive;
+    font-size: 2rem;
+    margin-top: 0;
+    color: white;
+}
+
+nav {
+    width: 100%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+}
+
+nav li {
+    padding: 10px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    min-width: 75px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: white;
+}
+
+#current {
+    background-color: gray;
+}
+
+#current a {
+    color: gainsboro;
+}
+
+/*BODY*/
+main {
+    background-color: oldlace;
+    box-shadow: inset 0px 11px 8px -10px rgb(244, 196, 75),
+                inset 0px -11px 8px -10px rgb(244, 196, 75);
+    background-image: radial-gradient(oldlace, rgb(255, 241, 216));
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+h2 span {
+    font-family: "Leckerli One", cursive;
+    font-size: 3rem;
+    display: block;
+}
+
+form {
+    border: 1px solid yellow;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: oldlace;
+}
+
+label {
+    font-size: 1.25rem;
+}
+
+input, textarea {
+    border-radius: 50px;
+    text-align: center;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid goldenrod;
+    max-width: 600px;
+    width: 100%;
+}
+
+form span {
+    color: red;
+    font-size: .9rem;
+    padding-bottom: 10px;
+}
+
+form button {
+    padding: 10px;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    min-width: 75px;
+    width: fit-content;
+    margin: 0 auto;
+    color: white;
+    font-size: 1.25rem;
+}
+
+/*FOOTER*/
+footer {
+    background-color: darkblue;
+    background-image: linear-gradient(to top right, rgb(4, 4, 103), darkblue);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+footer li {
+    padding: 0 5px;
+}
+
+footer a {
+    color: white;
+}
+
+/*ABOUT*/
+.star {
+    background-image: url("star.png");
+    background-position: 35% 0;
+    background-size: 150px 75px;
+    background-repeat: no-repeat;
+    display: block;
+    width: 100%;
+    height: 75px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#main-page > p span {
+    border-bottom: 2px dotted red;
+}
+
+/*TABLET*/
+@media screen and (min-width: 600px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
