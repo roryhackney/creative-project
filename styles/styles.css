@@ -4,6 +4,22 @@
     content. It is used by all pages to ensure a consistent look and feel.
 */
 
+:root {
+    --blue-dark: darkblue;
+    --blue-darker: rgb(11, 11, 77);
+    --white: white;
+    --black: black;
+    --offwhite: oldlace;
+    --offwhite-dark: rgb(255, 241, 216);
+    --gray-dark: gray;
+    --gray-light: gainsboro;
+    --yellow: yellow;
+    --gold: rgb(244, 196, 75);
+    --gold-dark: goldenrod;
+    --error: red;
+    --blue: rgb(179, 179, 230);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -12,9 +28,9 @@ body {
 
 /*HEADER*/
 header {
-    background-color: darkblue;
-    background-image: linear-gradient(180deg, rgb(11, 11, 77), darkblue);
-    color: white;
+    background-color: var(--blue-dark);
+    background-image: linear-gradient(180deg, var(--blue-darker), var(--blue-dark));
+    color: var(--white);
     text-align: center;
     padding: 20px;
 }
@@ -30,9 +46,9 @@ header a:nth-of-type(2) {
 
 h1 {
     font-family: "Leckerli One", cursive;
-    font-size: 2rem;
+    font-size: 3rem;
     margin-top: 0;
-    color: white;
+    color: var(--white);
 }
 
 nav {
@@ -41,8 +57,9 @@ nav {
 
 nav ul {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -51,31 +68,32 @@ nav ul {
 
 nav li {
     padding: 10px;
-    background-color: black;
-    border: 1px solid black;
+    background-color: var(--black);
+    border: 1px solid var(--black);
     border-radius: 10px;
     min-width: 75px;
+
 }
 
 nav li a {
     text-decoration: none;
-    color: white;
+    color: var(--white);
 }
 
 #current {
-    background-color: gray;
+    background-color: var(--gray-dark);
 }
 
 #current a {
-    color: gainsboro;
+    color: var(--gray-light);
 }
 
 /*BODY*/
 main {
-    background-color: oldlace;
-    box-shadow: inset 0px 11px 8px -10px rgb(244, 196, 75),
-                inset 0px -11px 8px -10px rgb(244, 196, 75);
-    background-image: radial-gradient(oldlace, rgb(255, 241, 216));
+    background-color: var(--offwhite);
+    box-shadow: inset 0px 11px 8px -10px var(--gold),
+                inset 0px -11px 8px -10px var(--gold);
+    background-image: radial-gradient(var(--offwhite), var(--offwhite-dark));
     padding: 20px;
     text-align: center;
     display: flex;
@@ -94,12 +112,12 @@ h2 span {
 }
 
 form {
-    border: 1px solid yellow;
+    border: 1px solid var(--yellow);
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: oldlace;
+    background-color: var(--offwhite);
 }
 
 label {
@@ -111,34 +129,92 @@ input, textarea {
     text-align: center;
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid goldenrod;
+    border: 1px solid var(--gold-dark);
     max-width: 600px;
     width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 form span {
-    color: red;
+    color: var(--error);
     font-size: .9rem;
     padding-bottom: 10px;
 }
 
 form button {
     padding: 10px;
-    background-color: black;
-    border: 1px solid black;
     border-radius: 10px;
     min-width: 75px;
     width: fit-content;
-    margin: 0 auto;
-    color: white;
+    margin: 5px;
+    color: var(--black);
+    background-color: var(--white);
     font-size: 1.25rem;
+}
+
+form button > span {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+    padding: 0;
+    margin: 0 auto;
+}
+
+form button[type=submit] {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+form .form-row {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form .form-row div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+form input.small {
+    max-width: 150px;
+    width: 100%;
+}
+
+form select {
+    font-size: 1.25rem;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid var(--gold-dark);
+    margin-bottom: 10px;
+    min-width: 200px;
+}
+
+form select option {
+    color: var(--black);
+    background-color: var(--white);
+    font-size: 1rem;
+}
+
+form select option.selected {
+    color: var(--white);
+    background-color: var(--blue-dark);
 }
 
 /*FOOTER*/
 footer {
-    background-color: darkblue;
-    background-image: linear-gradient(to top right, rgb(4, 4, 103), darkblue);
-    color: white;
+    background-color: var(--blue-dark);
+    background-image: linear-gradient(to top right, var(--blue-darker), var(--blue-dark));
+    color: var(--white);
     padding: 20px;
     text-align: center;
 }
@@ -158,12 +234,12 @@ footer li {
 }
 
 footer a {
-    color: white;
+    color: var(--white);
 }
 
 /*ABOUT*/
 .star {
-    background-image: url("star.png");
+    background-image: url("../images/star.png");
     background-position: 35% 0;
     background-size: 150px 75px;
     background-repeat: no-repeat;
@@ -175,7 +251,45 @@ footer a {
 }
 
 #main-page > p span {
-    border-bottom: 2px dotted red;
+    border-bottom: 2px dotted var(--error);
+}
+
+.special-button, .special-button.pink {
+    --dark: rgb(213, 145, 145);
+    --light: rgb(255, 220, 226);
+    --main: rgb(255, 196, 205);
+    border-radius: 0;
+    background-color: var(--main);
+    border-width: 5px;
+    border-color: var(--light) var(--dark) var(--dark) var(--light);
+    border-style: solid;
+}
+
+.special-button a {
+    color: var(--black);
+    display: block;
+}
+
+.special-button:active {
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+
+.special-button.blue {
+    --main: rgb(166, 166, 248);
+    --light: rgb(207, 216, 255);
+    --dark: rgb(142, 127, 203);
+}
+
+.special-button.gold {
+    --main: rgb(255, 213, 105);
+    --light: rgb(255, 240, 154);
+    --dark: rgb(219, 177, 87);
+}
+
+.special-button.gray {
+    --main: rgb(176, 176, 176);
+    --light: var(--gray-light);
+    --dark: var(--gray-dark);
 }
 
 /*TABLET*/
@@ -186,5 +300,26 @@ footer a {
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
+    }
+
+    form .form-row {
+        flex-direction: row;
+    }
+
+    form .form-row div {
+        width: 75%;
+    }
+
+    form .form-row div + div {
+        width: 25%;
+        padding-left: 10px;
+    }
+
+    form .half div, form .half div + div {
+        width: 50%;
+    }
+
+    input.medium {
+        max-width: 450px;
     }
 }
