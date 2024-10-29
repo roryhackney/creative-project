@@ -1,7 +1,6 @@
- 
-<!-- 
-    Author: Rory Hackney 
-    This is the Registration page for my Art Supply Tracker. It contains a registration form.
+<!--
+    Author: Rory Hackney
+    This is the Login page of my Art Supply Tracker. It contains a login form.
     All images are my own.
 -->
 <!DOCTYPE html>
@@ -11,10 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <title>Register | Art Supply Tracker</title>
+    <title>Reset Password | Art Supply Tracker</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
@@ -24,24 +22,18 @@
         <nav>
             <ul>
                 <li class="special-button pink"><a href="index.html">About</a></li>
-                <li class="special-button gray"><a>Register</a></li>
+                <li class="special-button blue"><a href="register.html">Register</a></li>
                 <li class="special-button gold"><a href="login.html">Log In</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h2><span>Register</span> for your art supply tracker!</h2>
+        <h2><span>Reset Password</span> for your art supply tracker!</h2>
         <form>
             <label for="email">Email</label>
             <input type="email" name="email" id="email" required>
-            <span>
-                Email already in use. Would you like to <a href="login.html">log in</a>?</a>
-            </span>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-            <span>Password must be 8+ characters, include a number and symbol, and be the entire 
-                text of the Bee Movie.</span>
-            <button type="submit">Register</button>
+            <button type="submit">Send Reset Link</button>
+            <span></span>
         </form>
     </main>
     <footer>
@@ -52,6 +44,6 @@
             <li><a href="https://www.linkedin.com/in/roryhackney" target="_blank">LinkedIn</a></li>
         </ul>
     </footer>
-    <script src="scripts/login.js"></script>
+    <script src="scripts/reset.js"></script>
 </body>
 </html>

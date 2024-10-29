@@ -9,6 +9,7 @@
     --blue-darker: rgb(11, 11, 77);
     --white: white;
     --black: black;
+    --offwhite-light: rgb(255, 251, 245);
     --offwhite: oldlace;
     --offwhite-dark: rgb(255, 241, 216);
     --gray-dark: gray;
@@ -58,7 +59,7 @@ nav {
 nav ul {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     list-style-type: none;
     margin: 0;
@@ -72,7 +73,7 @@ nav li {
     border: 1px solid var(--black);
     border-radius: 10px;
     min-width: 75px;
-
+    min-width: fit-content;
 }
 
 nav li a {
@@ -120,8 +121,20 @@ form {
     background-color: var(--offwhite);
 }
 
-label {
+label, fieldset {
     font-size: 1.25rem;
+}
+
+fieldset {
+    box-sizing: border-box;
+    border: 1px solid var(--yellow);
+    width: 100%;
+    margin: 20px;
+    background-color: var(--offwhite-light);
+}
+
+fieldset label {
+    font-size: 1rem;
 }
 
 input, textarea {
@@ -142,7 +155,7 @@ form span {
     padding-bottom: 10px;
 }
 
-form button {
+form button, #profile span {
     padding: 10px;
     border-radius: 10px;
     min-width: 75px;
@@ -162,7 +175,7 @@ form button > span {
     margin: 0 auto;
 }
 
-form button[type=submit] {
+form button[type=submit], #profile span {
     background-color: var(--black);
     color: var(--white);
 }
@@ -210,6 +223,45 @@ form select option.selected {
     background-color: var(--blue-dark);
 }
 
+.special-button, .special-button.pink {
+    --dark: rgb(213, 145, 145);
+    --light: rgb(255, 220, 226);
+    --main: rgb(255, 196, 205);
+    border-radius: 0;
+    background-color: var(--main);
+    border-width: 5px;
+    border-color: var(--light) var(--dark) var(--dark) var(--light);
+    border-style: solid;
+    white-space: nowrap;
+}
+
+.special-button a {
+    color: var(--black);
+    display: block;
+}
+
+.special-button:active {
+    border-color: var(--dark) var(--light) var(--light) var(--dark);
+}
+
+.special-button.blue {
+    --main: rgb(166, 166, 248);
+    --light: rgb(207, 216, 255);
+    --dark: rgb(142, 127, 203);
+}
+
+.special-button.gold {
+    --main: rgb(255, 213, 105);
+    --light: rgb(255, 240, 154);
+    --dark: rgb(219, 177, 87);
+}
+
+.special-button.gray {
+    --main: rgb(176, 176, 176);
+    --light: var(--gray-light);
+    --dark: var(--gray-dark);
+}
+
 /*FOOTER*/
 footer {
     background-color: var(--blue-dark);
@@ -254,42 +306,60 @@ footer a {
     border-bottom: 2px dotted var(--error);
 }
 
-.special-button, .special-button.pink {
-    --dark: rgb(213, 145, 145);
-    --light: rgb(255, 220, 226);
-    --main: rgb(255, 196, 205);
-    border-radius: 0;
-    background-color: var(--main);
-    border-width: 5px;
-    border-color: var(--light) var(--dark) var(--dark) var(--light);
-    border-style: solid;
+/*CUSTOMIZE*/
+#customize-page {
+    align-items: center;
 }
 
-.special-button a {
-    color: var(--black);
-    display: block;
+#customize-page img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 50%;
 }
 
-.special-button:active {
-    border-color: var(--dark) var(--light) var(--light) var(--dark);
+#customize-page img:hover {
+    opacity: 0.5;
 }
 
-.special-button.blue {
-    --main: rgb(166, 166, 248);
-    --light: rgb(207, 216, 255);
-    --dark: rgb(142, 127, 203);
+#customize-page > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    padding: 0 20px;
 }
 
-.special-button.gold {
-    --main: rgb(255, 213, 105);
-    --light: rgb(255, 240, 154);
-    --dark: rgb(219, 177, 87);
+#customize-page form {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
 }
 
-.special-button.gray {
-    --main: rgb(176, 176, 176);
-    --light: var(--gray-light);
-    --dark: var(--gray-dark);
+#customize-page fieldset div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+#customize-page fieldset label {
+    text-align: left;
+}
+
+#customize-page input[type=checkbox] {
+    width: fit-content;
+}
+
+#profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*TABLET*/
@@ -300,6 +370,10 @@ footer a {
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
+    }
+
+    nav ul {
+        justify-content: space-evenly;
     }
 
     form .form-row {
@@ -321,5 +395,13 @@ footer a {
 
     input.medium {
         max-width: 450px;
+    }
+}
+
+/*DESKTOP*/
+@media screen and (min-width: 900px) {
+    #customize-page > div {
+        flex-direction: row;
+        width: 100%;
     }
 }
