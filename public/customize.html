@@ -1,0 +1,74 @@
+<!--
+    Author: Rory Hackney
+    This is the Customize (settings) page of my Art Supply Tracker. It contains the user's account/settings.
+    All images are my own.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+        <title>Customize | Art Supply Tracker</title>
+        <link rel="stylesheet" href="styles/styles.css">
+    </head>
+<body>
+    <header>
+        <a href="index.html"><img src="images/astlogo.png" alt="Logo: cartoon art supplies"></a>
+        <a href="index.html"><h1>Art Supply Tracker</h1></a>
+        <nav>
+            <ul>
+                <li class="special-button pink"><a href="add-new.html">Add New</a></li>
+                <li class="special-button gray"><a href="customize.html">Customize</a></li>
+                <li class="special-button gold"><a href="index.html">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="customize-page">
+        <h2><span>Customize</span>your art supply tracker!</h2>
+        <div>
+            <div id="profile">
+                <img src="images/example-user.jpg" alt="Profile picture of a generic user">
+                <span>Change Profile Pic</span>
+            </div>
+            <form>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" disabled value="rory1234">
+                <label for="email">Email</label>
+                <input type="email" required value="roryhackney@gmail.com" name="email" id="email">
+                <fieldset>
+                    <legend>Art Supply Categories</legend>
+                    <div>
+                        <label for="markers">Pens / Markers</label>
+                        <input type="checkbox" name="markers" id="markers" checked="checked">
+                    </div>
+                    <div>
+                        <label for="markers">Acrylic Paint</label>
+                        <input type="checkbox" name="markers" id="markers">
+                    </div>
+                    <div>
+                        <label for="markers">Watercolor Pencils</label>
+                        <input type="checkbox" name="markers" id="markers" checked="checked">
+                    </div>
+                    <div>
+                        <label for="markers">Yarn</label>
+                        <input type="checkbox" name="markers" id="markers">
+                    </div>
+                </fieldset>
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>All content &copy; Rory Hackney 2024</p>
+        <ul>
+            <li><a href="https://www.roryhackney.com/portfolio" target="_blank">Portfolio</a></li>
+            <li><a href="https://github.com/roryhackney" target="_blank">Github</a></li>
+            <li><a href="https://www.linkedin.com/in/roryhackney" target="_blank">LinkedIn</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
