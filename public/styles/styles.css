@@ -149,13 +149,13 @@ input, textarea {
     margin-bottom: 10px;
 }
 
-form span {
+form span, #error {
     color: var(--error);
     font-size: .9rem;
     padding-bottom: 10px;
 }
 
-form button, #profile span {
+form button, #profile span, .button {
     padding: 10px;
     border-radius: 10px;
     min-width: 75px;
@@ -175,9 +175,13 @@ form button > span {
     margin: 0 auto;
 }
 
-form button[type=submit], #profile span {
+form button[type=submit], #profile span, .button {
     background-color: var(--black);
     color: var(--white);
+}
+
+.button {
+    text-decoration: none;
 }
 
 form .form-row {

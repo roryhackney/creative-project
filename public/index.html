@@ -23,43 +23,51 @@
             <ul>
                 <li class="special-button pink"><a href="/add-new">Add New</a></li>
                 <li class="special-button gray"><a href="/customize">Customize</a></li>
-                <li id="logout-button" class="special-button gold"><a href="/about">Log Out</a></li>
+                <li id="logout-button" class="special-button gold"><a href="/logout">Log Out</a></li>
             </ul>
         </nav>
     </header>
     <main id="customize-page">
-        <h2><span>Customize</span>your art supply tracker!</h2>
+        <h2><span>Welcome</span>to your art supply tracker!</h2>
         <div>
-            <div id="profile">
-                <img src="images/example-user.jpg" alt="Profile picture of a generic user">
-                <span>Change Profile Pic</span>
-            </div>
-            <form>
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" disabled value="rory1234">
-                <label for="email">Email</label>
-                <input type="email" required value="roryhackney@gmail.com" name="email" id="email">
-                <fieldset>
-                    <legend>Art Supply Categories</legend>
-                    <div>
-                        <label for="markers">Pens / Markers</label>
-                        <input type="checkbox" name="markers" id="markers" checked="checked">
-                    </div>
-                    <div>
-                        <label for="markers">Acrylic Paint</label>
-                        <input type="checkbox" name="markers" id="markers">
-                    </div>
-                    <div>
-                        <label for="markers">Watercolor Pencils</label>
-                        <input type="checkbox" name="markers" id="markers" checked="checked">
-                    </div>
-                    <div>
-                        <label for="markers">Yarn</label>
-                        <input type="checkbox" name="markers" id="markers">
-                    </div>
-                </fieldset>
-                <button type="submit">Save</button>
-            </form>
+            <!--TODO: Would be nice to sort and filter at some point -->
+            <!-- <form method="GET">
+                <label for="sort">Sort By</label>
+                <select id="sort" name="sort">
+                    <option>
+                        Category
+                    </option>
+                    <option>
+                        Type
+                    </option>
+                    <option>
+                        Name
+                    </option>
+                    <option>
+                        ...
+                    </option>
+                </select>
+                <label for="filter">Filter By</label>
+                <select id="filter" name="filter">
+                    <option>
+                        Category
+                    </option>
+                    <option>
+                        Type
+                    </option>
+                    <option>
+                        ...
+                    </option>
+                </select>
+                <button type="submit">Apply</button>
+            </form> -->
+            <section>
+                <h3>Your Art Supplies</h3>
+                <div id="list-art-supplies">
+                </div>
+            </section>
+            <a class="button" href="/add-new">Add New Art Supplies</a>
+            <a class="button" href="/customize">Customize Settings</a>
         </div>
     </main>
     <footer>
@@ -71,5 +79,6 @@
         </ul>
     </footer>
     <script src="scripts/index.js"></script>
+    <script src="scripts/logout.js"></script>
 </body>
 </html>

@@ -1,3 +1,7 @@
+--Rory Hackney
+--Database SQL file, import into DB Browser (SQLite) to run
+--Creates the database and fills it with data
+
 BEGIN TRANSACTION;
 -- reset db to create it again
 DROP TABLE IF EXISTS user_supplies;
@@ -255,3 +259,40 @@ INSERT INTO user_supplies (user_id, supply_id, quantity, onWishlist, storageLoca
 
 --TODO: art_supplies_properties linking table that tracks values of custom properties for each art supply, eg supply Rose Copic Marker -> color Rose Salmon
 COMMIT;
+
+--intermediate steps for retrieving user supplies, in case I need it later
+-- const step1 = `SELECT user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation
+-- FROM user_supplies
+-- WHERE user_supplies.user_id = 1`;
+-- const step2 = `SELECT user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation
+-- , art_supplies.art_supply_name, art_supplies.brand_name 
+-- FROM user_supplies
+-- INNER JOIN art_supplies ON user_supplies.supply_id = art_supplies.art_supply_id
+-- WHERE user_supplies.user_id = 1`;
+-- const step3 = `SELECT user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation
+-- , art_supplies.art_supply_name, art_supplies.brand_name 
+-- , supply_type_name 
+-- FROM user_supplies
+-- INNER JOIN art_supplies ON user_supplies.supply_id = art_supplies.art_supply_id 
+-- INNER JOIN supply_types ON art_supplies.art_supply_type = supply_types.supply_type_id
+-- WHERE user_supplies.user_id = 1`;
+-- const step4 = `SELECT user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation
+-- , art_supplies.art_supply_name, art_supplies.brand_name 
+-- , supply_type_name 
+-- , user_supply_types.supply_type_id
+-- FROM user_supplies
+-- INNER JOIN art_supplies ON user_supplies.supply_id = art_supplies.art_supply_id 
+-- INNER JOIN supply_types ON art_supplies.art_supply_type = supply_types.supply_type_id 
+-- INNER JOIN user_supply_types ON supply_types.supply_type_id = user_supply_types.supply_type_id 
+-- WHERE user_supplies.user_id = 1`;
+-- //5 rows
+-- const step5 = `SELECT user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation
+--                 , art_supplies.art_supply_name, art_supplies.brand_name 
+--                 , supply_type_name 
+--                 , user_supply_types.supply_type_id
+--                 FROM user_supplies
+--                 INNER JOIN art_supplies ON user_supplies.supply_id = art_supplies.art_supply_id 
+--                 INNER JOIN supply_types ON art_supplies.art_supply_type = supply_types.supply_type_id 
+--                 INNER JOIN user_supply_types ON supply_types.supply_type_id = user_supply_types.supply_type_id 
+--                 INNER JOIN user_categories ON user_supply_types.parent_category = user_categories.id 
+--                 WHERE user_supplies.user_id = 1`;

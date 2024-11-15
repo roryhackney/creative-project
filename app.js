@@ -1,3 +1,7 @@
+// Express / Node file that handles get/post routing and API routes,
+// database connection and querying, authentication, etc
+// Rory Hackney
+
 const express = require('express'); 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser'); //cookies
@@ -8,8 +12,6 @@ const sqlite = require('sqlite');
 const sqlite3 = require('sqlite3');
 const cors = require("cors"); //to allow fetching
 
-const PORT = process.env.PORT || 8000;
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -19,7 +21,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
+//one week in milliseconds for timers, cookie expirations, etc
 const ONE_WEEK = 604800000;
+//the port this app connects to on localhost
+const PORT = process.env.PORT || 8000;
 
 //get database connection
 async function getDBConnection() {
@@ -86,13 +91,13 @@ app.get("/customize", (req, res) => {
     res.sendFile(__dirname + "/public/customize.html");
 });
 
-//add new art supply form route, logged out users are redirect
+//add new art supply form route, logged out users are redirected
 app.get("/add-new", (req, res) => {
     goAboutIfLoggedOut(req, res);
     res.sendFile(__dirname + "/public/add-new.html");
 });
 
-//handle login form submission route (POST)
+//handle login form submission route, logging in if correct and returning errors otherwise
 app.post("/login", async (req, res) => {
     res.type("txt");
     const email = req.body.email;
@@ -127,7 +132,7 @@ app.post("/login", async (req, res) => {
 });
 
 /**
- * If the email already exists, display errors, otherwise add to database and log in
+ * Handle registration form submission (POST), adding to database if email not already registered
  */
 app.post("/register", async (req, res) => {
     const email = req.body.email;
@@ -136,7 +141,6 @@ app.post("/register", async (req, res) => {
     try {
         db = await getDBConnection();
         const emailCount = await db.get(checkExistsQuery, [email]);
-        console.log(emailCount);
         if (emailCount["COUNT(*)"] !== 0) {
             res.status(400).send("Email already exists.")
         } else {
@@ -165,11 +169,55 @@ app.post("/register", async (req, res) => {
     }
 });
 
+/**
+ * Logs out the current user by clearing cookie
+ */
 app.get("/logout", (req, res) => {
     res.clearCookie("currentUser");
     res.sendStatus(200);
 })
 
+/**
+ * Returns the current users art supplies from the database as JSON
+ */
+app.post("/display-art-supplies", async (req, res) => {
+    goAboutIfLoggedOut(req, res);
+    const selectQuery = `SELECT category_name AS category
+                , supply_type_name AS type
+                , art_supplies.art_supply_name AS name, art_supplies.brand_name AS brand
+                , user_supplies.quantity, user_supplies.onWishlist, user_supplies.storageLocation AS location 
+                FROM user_supplies
+                INNER JOIN art_supplies ON user_supplies.supply_id = art_supplies.art_supply_id 
+                INNER JOIN supply_types ON art_supplies.art_supply_type = supply_types.supply_type_id 
+                INNER JOIN user_supply_types ON supply_types.supply_type_id = user_supply_types.supply_type_id 
+                INNER JOIN user_categories ON user_supply_types.parent_category = user_categories.id 
+                INNER JOIN categories ON user_categories.category_id = categories.category_id 
+                WHERE user_supplies.user_id = ? 
+                ORDER BY category_name`;
+    let db = null;
+    try {
+        db = await getDBConnection();
+        const userId = JSON.parse(req.cookies["currentUser"]).user_id;
+        const results = await db.all(selectQuery, userId);
+        await db.close();
+        res.status(200);
+        res.json(results);
+    } catch (error) {
+        res.status(500);
+        if (db !== null) await db.close();
+    }
+});
+
+/**
+ * Retrieves user data for customize/account page use as JSON
+ */
+app.post("/get-user-profile", (req, res) => {
+    if (req.cookies["currentUser"]) {
+        res.status(200).json({"currentUser": JSON.parse(req.cookies["currentUser"])});
+    } else {
+        res.status(401).json({"currentUser": null});
+    }
+})
 
 // Start the server
 if (require.main === module) {

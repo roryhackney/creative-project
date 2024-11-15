@@ -1,3 +1,5 @@
+//Rory Hackney
+//This file handles authenticating users who have filled out either the login or registration form, including form validation and fetching of backend database routes.
 "use strict";
 
 (function() {

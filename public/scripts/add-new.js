@@ -39,9 +39,7 @@
             currentOption = document.getElementById(FAMILY);
             changePlaceholder("Loading...", "");
             
-            // console.log("cache:", cache);
             if (cache.hasOwnProperty(FAMILY)) {
-                // console.log("fetching from cache");
                 displayColors(cache[FAMILY]);
             } else {
                 //fetch here
@@ -150,7 +148,6 @@
      * @param {string} colorFamily: should be one of the select options
      */
     async function fetchColors(colorFamily) {
-        // console.log("fetching from api");
         fetch("https://www.csscolorsapi.com/api/colors/group/" + colorFamily)
         .then((response) => statusCheck(response))
         .then((response) => response.json())
@@ -175,7 +172,6 @@
         let col = validateColor();
 
         errors = await desc || await qty || await fam || await col;
-        // console.log(errors);
         if (errors) {
             event.preventDefault();
         }

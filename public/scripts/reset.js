@@ -1,3 +1,6 @@
+//Rory Hackney
+//This file handles resetting the user's password on request
+
 "use strict";
 (function() {
     window.addEventListener("load", init);
