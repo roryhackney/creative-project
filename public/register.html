@@ -19,28 +19,25 @@
 </head>
 <body>
     <header>
-        <a href="index.html"><img src="images/astlogo.png" alt="Logo: cartoon art supplies"></a>
-        <a href="index.html"><h1>Art Supply Tracker</h1></a>
+        <a href="/about"><img src="images/astlogo.png" alt="Logo: cartoon art supplies"></a>
+        <a href="/about"><h1>Art Supply Tracker</h1></a>
         <nav>
             <ul>
-                <li class="special-button pink"><a href="index.html">About</a></li>
+                <li class="special-button pink"><a href="/about">About</a></li>
                 <li class="special-button gray"><a>Register</a></li>
-                <li class="special-button gold"><a href="login.html">Log In</a></li>
+                <li class="special-button gold"><a href="/login">Log In</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <h2><span>Register</span> for your art supply tracker!</h2>
-        <form>
+        <form method="POST" id="register-form">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <span>
-                Email already in use. Would you like to <a href="login.html">log in</a>?</a>
-            </span>
+            <input type="text" name="email" id="email">
+            <span id="email-error"></span>
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-            <span>Password must be 8+ characters, include a number and symbol, and be the entire 
-                text of the Bee Movie.</span>
+            <input type="password" name="password" id="password">
+            <span id="password-error"></span>
             <button type="submit">Register</button>
         </form>
     </main>
@@ -52,6 +49,6 @@
             <li><a href="https://www.linkedin.com/in/roryhackney" target="_blank">LinkedIn</a></li>
         </ul>
     </footer>
-    <script src="scripts/login.js"></script>
+    <script src="scripts/authenticate.js"></script>
 </body>
 </html>

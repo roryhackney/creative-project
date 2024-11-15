@@ -4,7 +4,7 @@
   "description": "Art Supply Tracker - adding backend project",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "nyc mocha"
   },
   "repository": {
@@ -15,7 +15,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.7",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "express": "^4.21.1",
+    "multer": "^1.4.5-lts.1",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
