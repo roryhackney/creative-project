@@ -145,7 +145,6 @@ app.get("/add-new", (req, res) => {
  *     "Server error."
  */
 app.post("/login", async (req, res) => {
-    res.type("txt");
     const email = req.body.email;
     const password = req.body.password;
     const query = "SELECT user_id, user_alias, profile_picture FROM users WHERE user_email = ? AND user_password = ?";
@@ -155,6 +154,7 @@ app.post("/login", async (req, res) => {
         const user = await db.get(query, [email, password]);
         //if there is no user with the provided credentials, return status 400
         if (user === undefined) {
+            res.type("txt");
             res.status(400).send("Invalid credentials.");
         }
         //if there is a user match, add login cookie for 1 week and update last login
@@ -166,6 +166,7 @@ app.post("/login", async (req, res) => {
             //update last_login in database
             const updateQuery = "UPDATE users SET last_login = DATE('now') WHERE user_id = ?";
             await db.run(updateQuery, user["user_id"]);
+            res.type("txt");
             res.status(200).send("Logging in");
         }
         await db.close();
@@ -173,6 +174,7 @@ app.post("/login", async (req, res) => {
         if (db !== null) {
             await db.close();
         }
+        res.type("txt");
         res.status(500).send("Server error.");
     }
 });
@@ -209,18 +211,21 @@ app.post("/register", async (req, res) => {
                     profile_picture: null,
                     email: email
                 }
+                res.type("text");
                 res.cookie("currentUser", JSON.stringify(user), {expires: new Date(Date.now() + ONE_WEEK)});
                 res.status(200).send("Registering");
             } else { //unable to insert
+                res.type("text");
                 res.status(500).send("Server error.");
             }
         }
         await db.close();
     } catch (error) {
-        res.status(500).send("Server error.");
         if (db !== null) {
             await db.close();
         }
+        res.type("text");
+        res.status(500).send("Server error.");
     }
 });
 
@@ -278,6 +283,7 @@ app.post("/display-art-supplies", async (req, res) => {
         const userId = JSON.parse(req.cookies["currentUser"]).user_id;
         const results = await db.all(selectQuery, userId);
         await db.close();
+        res.type("json");
         res.status(200);
         res.json(results);
     } catch (error) {
@@ -309,9 +315,13 @@ app.post("/display-art-supplies", async (req, res) => {
  */
 app.post("/get-user-profile", (req, res) => {
     if (req.cookies["currentUser"]) {
-        res.status(200).json({"currentUser": JSON.parse(req.cookies["currentUser"])});
+        res.type("json");
+        res.status(200);
+        res.json({"currentUser": JSON.parse(req.cookies["currentUser"])});
     } else {
-        res.status(401).json({"currentUser": null});
+        res.type("json");
+        res.status(401);
+        res.json({"currentUser": null});
     }
 })
 

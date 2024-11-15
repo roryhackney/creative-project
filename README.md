@@ -7,3 +7,5 @@ Try going to add-new.html and fill out the form. When you select a color family,
 User authentication has now been implemented. You can log in, log out, and register. Pages will redirect based on authentication requirements to ensure only valid access to content.
 
 Once logged in, the system will display any art supplies you have in the database. It will also display your preferred name and email in the customize page. Still working on implementing adding art supplies, but you can add them manually in the database file or log in as user 1 (tammy@gmail.com, password1), who has 5 supplies already added, to demo the functionality.
+
+To view the API documentation, open apidoc/index.html in the browser or open apidoc/APIDOC.md
