@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Art Supply Tracker - adding backend project",
   "main": "index.js",
+  "apidoc": {
+    "title": "Creative Project 3",
+    "url" : "https://api.github.com/v1"
+  },
   "scripts": {
     "start": "nodemon app.js",
     "test": "nyc mocha"
@@ -14,6 +18,7 @@
   "author": "Rory Hackney",
   "license": "ISC",
   "dependencies": {
+    "apidoc": "^1.2.0",
     "axios": "^1.7.7",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

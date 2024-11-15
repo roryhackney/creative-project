@@ -18,6 +18,7 @@
         .then((res) => res.json())
         .then((res) => {
             const user = res.currentUser;
+            console.log(res);
             if (user.alias !== null) {
                 document.getElementById("alias").value = user.user_alias;
             }

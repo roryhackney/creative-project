@@ -50,7 +50,9 @@ function goAboutIfLoggedOut(req, res) {
     }
 }
 
-//if the user is logged in, go to home, otherwise, go to about
+/**
+ * if the user is logged in, go to home, otherwise, go to about
+ */
 app.get('/', (req, res) => {
     goAboutIfLoggedOut(req, res);
     res.sendFile(__dirname + "/public/index.html")
@@ -60,44 +62,88 @@ app.get('/', (req, res) => {
 // https://stackoverflow.com/questions/25166726/express-serves-index-html-even-when-my-routing-is-to-a-different-file
 app.use(express.static('public'));
 
-//if the user is logged in, go to home, otherwise go to about
+/**
+ * @api {get} /about About Page
+ * @apiName AboutPage
+ * @apiGroup User
+ * @apiDescription If the user is logged out, loads about page, else redirects
+ */
 app.get('/about', (req, res) => {
     goHomeIfLoggedIn(req, res);
     res.sendFile(__dirname + "/public/about.html");
 });
 
-//login form route, logged in users are redirected
+/**
+ * @api {get} /login Login Page
+ * @apiName LoginPage
+ * @apiGroup User
+ * @apiDescription If the user is logged out, loads login page, else redirects
+ */
 app.get("/login", (req, res) => {
     goHomeIfLoggedIn(req, res);
     res.sendFile(__dirname + "/public/login.html");
 });
 
-//register form route, logged in users are redirected
+/**
+ * @api {get} /register Register Page
+ * @apiName RegisterPage
+ * @apiGroup User
+ * @apiDescription If the user is logged out, loads registration page, else redirects
+ */
 app.get("/register", (req, res) => {
     goHomeIfLoggedIn(req, res);
     res.sendFile(__dirname + "/public/register.html");
 });
 
 
-//reset password form route, logged in users are redirected
+/**
+ * @api {get} /reset-password Reset Password Page
+ * @apiName ResetPasswordPage
+ * @apiGroup User
+ * @apiDescription If the user is logged out, loads reset password page, else redirects
+ */
 app.get("/reset-password", (req, res) => {
     goHomeIfLoggedIn(req, res);
     res.sendFile(__dirname + "/public/reset.html");
 });
 
-//customize account form route, logged out users are redirected
+/**
+ * @api {get} /customize Customize Settings Page
+ * @apiName CustomizePage
+ * @apiGroup User
+ * @apiDescription If the user is logged in, loads customize page, else redirects
+ */
 app.get("/customize", (req, res) => {
     goAboutIfLoggedOut(req, res);
     res.sendFile(__dirname + "/public/customize.html");
 });
 
-//add new art supply form route, logged out users are redirected
+/**
+ * @api {get} /add-new Add New Art Supply Page
+ * @apiName AddNewPage
+ * @apiGroup User
+ * @apiDescription If the user is logged in, loads add new supply page, else redirects
+ */
 app.get("/add-new", (req, res) => {
     goAboutIfLoggedOut(req, res);
     res.sendFile(__dirname + "/public/add-new.html");
 });
 
-//handle login form submission route, logging in if correct and returning errors otherwise
+/**
+ * @api {post} /login Login
+ * @apiName Login
+ * @apiGroup User
+ * @apiDescription Logs in if credentials are found in database, else returns errors
+ * @apiSuccessExample {text} Success-Response:
+ *     HTTP/1.1 200 OK
+ *     "Logging in"
+ * @apiErrorExample {text} Bad Credentials:
+ *     HTTP/1.1 400 Bad Request
+ *     "Invalid credentials."
+ * @apiErrorExample {text} Server Error:
+ *     HTTP/1.1 500 Internal Server Error
+ *     "Server error."
+ */
 app.post("/login", async (req, res) => {
     res.type("txt");
     const email = req.body.email;
@@ -132,7 +178,16 @@ app.post("/login", async (req, res) => {
 });
 
 /**
- * Handle registration form submission (POST), adding to database if email not already registered
+ * @api {post} /register Register User Account
+ * @apiName Register
+ * @apiGroup User
+ * @apiDescription If the email is not registered already, registers user in database and logs in, else error
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ * @apiErrorExample Email Exists:
+ *     HTTP/1.1 400 Bad Request
+ * @apiErrorExample Server Error:
+ *     HTTP/1.1 500 Internal Server Error
  */
 app.post("/register", async (req, res) => {
     const email = req.body.email;
@@ -170,7 +225,12 @@ app.post("/register", async (req, res) => {
 });
 
 /**
- * Logs out the current user by clearing cookie
+ * @api {post} /logout Logout
+ * @apiName Logout
+ * @apiGroup User
+ * @apiDescription Logs out the current user
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
  */
 app.get("/logout", (req, res) => {
     res.clearCookie("currentUser");
@@ -178,7 +238,25 @@ app.get("/logout", (req, res) => {
 })
 
 /**
- * Returns the current users art supplies from the database as JSON
+ * @api {post} /display-art-supplies Request User Art Supplies
+ * @apiName DisplayArtSupplies
+ * @apiGroup User
+ * @apiDescription If the user is logged in, sends their art supplies as JSON, otherwise fails
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [
+ *      {
+ *       "category": "Painting",
+ *       "type": "Brush",
+ *       "brand": "Winsor & Newton",
+ *       "quantity": 1,
+ *       "onWishlist": true,
+ *       "location": "Closet bottom shelf"
+ *      },
+ *      {...}
+ *     ]
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 500 Internal Server Error
  */
 app.post("/display-art-supplies", async (req, res) => {
     goAboutIfLoggedOut(req, res);
@@ -203,13 +281,31 @@ app.post("/display-art-supplies", async (req, res) => {
         res.status(200);
         res.json(results);
     } catch (error) {
-        res.status(500);
         if (db !== null) await db.close();
+        res.status(500);
     }
 });
 
 /**
- * Retrieves user data for customize/account page use as JSON
+ * @api {post} /get-user-profile Request User information
+ * @apiName GetUserProfile
+ * @apiGroup User
+ * @apiDescription If the user is logged in, sends profile information, otherwise fails
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "currentUser": {
+ *           "user_id": 99,
+ *           "user_alias": "Cool Gal",
+ *           "profile_picture": null,
+ *           "email": "coolgal@coolemails.com"
+ *       }
+ *     }
+ * @apiErrorExample {json} Error-Response:
+ *     HTTP/1.1 401 Unauthorized
+ *     {
+ *       "currentUser": null
+ *     }
  */
 app.post("/get-user-profile", (req, res) => {
     if (req.cookies["currentUser"]) {
